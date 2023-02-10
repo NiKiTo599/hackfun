@@ -8,16 +8,16 @@ const highScore = localStorage.getItem('highScore');
 let SCORE = 0;
 
 const BGImage = new Image();
-BGImage.src = '/static/bg5.png';
+BGImage.src = 'https://nikito599.github.io/hackfun/static/bg5.png';
 
 const HEROImage = new Image();
-HEROImage.src = '/static/unicorn.png';
+HEROImage.src = 'https://nikito599.github.io/hackfun/static/unicorn.png';
 
 const ENTITYImage = new Image();
-ENTITYImage.src = '/static/note1.png';
+ENTITYImage.src = 'https://nikito599.github.io/hackfun/static/note1.png';
 
 const BAD_ENTITYImage = new Image();
-BAD_ENTITYImage.src = '/static/note2.png';
+BAD_ENTITYImage.src = 'https://nikito599.github.io/hackfun/static/note2.png';
 
 let IS_START = true;
 
@@ -224,11 +224,11 @@ function main() {
   const backgroundSelectValue = document.querySelector('#bg');
 
   heroSelectValue.addEventListener('change', (data) => {
-    HEROImage.src = `/static/${data.target.value.toLowerCase()}.png`;
+    HEROImage.src = `https://nikito599.github.io/hackfun/static/${data.target.value.toLowerCase()}.png`;
   });
 
   backgroundSelectValue.addEventListener('change', (data) => {
-    BGImage.src = `/static/${data.target.value.toLowerCase()}.png`;
+    BGImage.src = `https://nikito599.github.io/hackfun/static/${data.target.value.toLowerCase()}.png`;
   });
 
   document.addEventListener('keydown', (e) => {

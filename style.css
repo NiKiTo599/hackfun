@@ -10,7 +10,7 @@ body {
     font-size: 16px;
     text-transform: uppercase;
     color: #212121;
-    font-family: 'Press Start 2P', cursive;
+    font-family: "Press Start 2P", cursive;
 }
 
 .container {
@@ -55,11 +55,22 @@ body {
     color: red;
 }
 
-.jump-btn:active, 
+.jump-btn:active,
 .jump-btn:focus {
     outline: none;
 }
 
 .high-score {
     margin-top: 14px;
+}
+
+select {
+    padding: 10px 20px;
+    height: 45px;
+    border-radius: 20px;
+}
+
+.form {
+    display: flex;
+    gap: 20px;
 }

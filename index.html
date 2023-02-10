@@ -2,14 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Press+Start+2P"
-      rel="stylesheet"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
     <title>tap-tap-oke</title>
   </head>
@@ -19,12 +13,31 @@
         <div>tap-tap-oke</div>
         <div>score: <span id="score">0</span></div>
       </div>
+
+      <div class="form">
+        <div class="hero">
+          <label for="hero">Choose your hero</label>
+          <select id="hero">
+            <option>Hero</option>
+            <option>Rocker</option>
+          </select>
+        </div>
+
+        <div class="background">
+          <label for="bg">Choose your background</label>
+          <select id="bg">
+            <option value="bg">Variant 1</option>
+            <option value="bg2">Variant 2</option>
+            <option value="bg3">Variant 3</option>
+            <option value="bg4">Variant 4</option>
+          </select>
+        </div>
+      </div>
+
       <canvas id="canvas"></canvas>
       <audio id="audio" controls autoplay></audio>
       <button class="jump-btn">start</button>
-      <div class="high-score">
-        high score: <span id="high-score">0</span>
-      </div>
+      <div class="high-score">high score: <span id="high-score">0</span></div>
     </div>
     <input type="file" id="file" />
     <script src="main.js"></script>

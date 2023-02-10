@@ -8,16 +8,16 @@ const highScore = localStorage.getItem('highScore');
 let SCORE = 0;
 
 const BGImage = new Image();
-BGImage.src = 'file:///Users/akulichnikita/tap-tap-oke/static/bg.png';
+BGImage.src = '/static/bg.png';
 
 const HEROImage = new Image();
-HEROImage.src = 'file:///Users/akulichnikita/tap-tap-oke/static/hero.png';
+HEROImage.src = '/static/hero.png';
 
 const ENTITYImage = new Image();
-ENTITYImage.src = 'file:///Users/akulichnikita/tap-tap-oke/static/entity.png';
+ENTITYImage.src = '/static/entity.png';
 
 const BAD_ENTITYImage = new Image();
-BAD_ENTITYImage.src = 'file:///Users/akulichnikita/tap-tap-oke/static/bad-entity.png';
+BAD_ENTITYImage.src = '/static/bad-entity.png';
 
 let IS_START = true;
 

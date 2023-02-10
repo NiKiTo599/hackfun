@@ -220,6 +220,17 @@ function main() {
 
   frame();
 
+  const heroSelectValue = document.querySelector('#hero');
+  const backgroundSelectValue = document.querySelector('#bg');
+
+  heroSelectValue.addEventListener('change', (data) => {
+    HEROImage.src = `/static/${data.target.value.toLowerCase()}.png`;
+  });
+
+  backgroundSelectValue.addEventListener('change', (data) => {
+    BGImage.src = `/static/${data.target.value.toLowerCase()}.png`;
+  });
+
   document.addEventListener('keydown', (e) => {
     if (e.code === 'Space') jump();
   });

@@ -8,16 +8,16 @@ const highScore = localStorage.getItem('highScore');
 let SCORE = 0;
 
 const BGImage = new Image();
-BGImage.src = '/static/bg.png';
+BGImage.src = 'file:///Users/akulichnikita/tap-tap-oke/static/bg.png';
 
 const HEROImage = new Image();
-HEROImage.src = '/static/hero.png';
+HEROImage.src = 'file:///Users/akulichnikita/tap-tap-oke/static/hero.png';
 
 const ENTITYImage = new Image();
-ENTITYImage.src = '/static/entity.png';
+ENTITYImage.src = 'file:///Users/akulichnikita/tap-tap-oke/static/entity.png';
 
 const BAD_ENTITYImage = new Image();
-BAD_ENTITYImage.src = '/static/bad-entity.png';
+BAD_ENTITYImage.src = 'file:///Users/akulichnikita/tap-tap-oke/static/bad-entity.png';
 
 let IS_START = true;
 
@@ -54,7 +54,7 @@ const endY = WORLD_HEIGHT - ENTITY_SIZE - GAP_VERTICAL;
 let currentY = startY;
 
 function randomEntityY() {
-  if (currentY < startY || currentY > endY || Math.random() >= .5) {
+  if (currentY < startY || currentY > endY || Math.random() >= 0.5) {
     d = -d;
   }
   currentY += d;
@@ -67,10 +67,7 @@ function randomEntityY() {
 }
 
 function randomEntityX() {
-  return randomIntFromInterval(
-    0,
-    ENTITY_SIZE
-  );
+  return randomIntFromInterval(0, ENTITY_SIZE);
 }
 
 function randomBadEntity() {
@@ -80,11 +77,9 @@ function randomBadEntity() {
 
 let ENTITIES = [];
 
-function createEntity({
-  x = WORLD_WIDTH,
-  y = 0,
-  size = 1
-}) {
+let pass = false;
+
+function createEntity({ x = WORLD_WIDTH, y = 0, size = 1 }) {
   const _size = size * 30;
 
   ENTITIES.push({
@@ -93,7 +88,7 @@ function createEntity({
     width: _size,
     height: _size,
     isBad: randomBadEntity(),
-    size: _size
+    size: _size,
   });
 }
 
@@ -110,18 +105,32 @@ function frame() {
 }
 
 function drawAndMoveEntities() {
+  console.log(ENTITIES);
   ENTITIES = [...ENTITIES]
-    .map((entity) => {
+    .reduce((acc, entity) => {
+      const lastIndex = acc.length - 1;
 
+      if (lastIndex >= 0) {
+        const prevEntity = acc[lastIndex];
+
+        const rightX = Math.abs(entity.x - prevEntity.x) > ENTITY_SIZE;
+        const rightY = Math.abs(entity.y - prevEntity.y) > ENTITY_SIZE;
+
+        if (rightX && rightY) {
+          acc.push(entity);
+        }
+      } else {
+        acc.push(entity);
+      }
+
+      return acc;
+    }, [])
+    .map((entity) => {
+      console.log(ENTITIES);
       const path = WORLD_WIDTH - ENTITY_SIZE - entity.x;
-      const size = entity.x > WORLD_WIDTH - ENTITY_SIZE * 2 ? entity.size * ENTITY_SIZE / path : entity.size;
-      ctx.drawImage(
-        entity.isBad ? BAD_ENTITYImage : ENTITYImage,
-        entity.x,
-        entity.y,
-        size,
-        size
-      );
+      const size =
+        entity.x > WORLD_WIDTH - ENTITY_SIZE * 2 ? (entity.size * ENTITY_SIZE) / path : entity.size;
+      ctx.drawImage(entity.isBad ? BAD_ENTITYImage : ENTITYImage, entity.x, entity.y, size, size);
 
       return { ...entity, x: entity.x - SPEED, width: size, height: size };
     })
@@ -169,13 +178,7 @@ function decreaseScore() {
 }
 
 function drawHero() {
-  ctx.drawImage(
-    HEROImage,
-    HERO_POS_X,
-    HERO_POS_Y,
-    HERO_SIZE,
-    HERO_SIZE
-  );
+  ctx.drawImage(HEROImage, HERO_POS_X, HERO_POS_Y, HERO_SIZE, HERO_SIZE);
 }
 
 function checkCollisionWithHero({ x, y, width, height }) {
@@ -224,11 +227,8 @@ function main() {
 
   window.addEventListener('CREATE', (data) => {
     const value = data.detail.value;
-    createEntity({size: value, y: randomEntityY()})
-  });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.code === 'KeyF') createEntity({ y: randomEntityY() });
+    createEntity({ y: (WORLD_HEIGHT * value) / 2 });
   });
 }
 

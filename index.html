@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./index.css">
-    <title>Document</title>
-</head>
-<body>
-    <div class="container"></div>
-    <input type="file" id="file"></input>
-    <audio id="audio" controls autoplay></audio>
-    <script src="./index.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Press+Start+2P"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>tap-tap-oke</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div>tap-tap-oke</div>
+        <div>score: <span id="score">0</span></div>
+      </div>
+      <canvas id="canvas"></canvas>
+      <audio id="audio" controls autoplay></audio>
+      <button class="jump-btn">start</button>
+      <div class="high-score">
+        high score: <span id="high-score">0</span>
+      </div>
+    </div>
+    <input type="file" id="file" />
+    <script src="main.js"></script>
+    <script src="./music.js"></script>
+  </body>
 </html>

@@ -8,7 +8,7 @@ const highScore = localStorage.getItem('highScore');
 let SCORE = 0;
 
 const BGImage = new Image();
-BGImage.src = '/static/bg3.png';
+BGImage.src = '/static/bg5.png';
 
 const HEROImage = new Image();
 HEROImage.src = '/static/hero3.png';
@@ -143,11 +143,6 @@ function drawAndMoveEntities() {
 
       if (isCollect) {
         increaseScore();
-        // if (entity.isBad) {
-        //   decreaseScore();
-        // } else {
-        //   increaseScore();
-        // }
 
         return false;
       }

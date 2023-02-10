@@ -8,16 +8,16 @@ const highScore = localStorage.getItem('highScore');
 let SCORE = 0;
 
 const BGImage = new Image();
-BGImage.src = '/static/bg.png';
+BGImage.src = '/static/bg3.png';
 
 const HEROImage = new Image();
-HEROImage.src = '/static/hero.png';
+HEROImage.src = '/static/hero3.png';
 
 const ENTITYImage = new Image();
-ENTITYImage.src = '/static/entity.png';
+ENTITYImage.src = '/static/note1.png';
 
 const BAD_ENTITYImage = new Image();
-BAD_ENTITYImage.src = '/static/bad-entity.png';
+BAD_ENTITYImage.src = '/static/note2.png';
 
 let IS_START = true;
 
@@ -30,7 +30,7 @@ ctx.canvas.height = WORLD_HEIGHT;
 
 const GAP_VERTICAL = WORLD_HEIGHT / 10;
 
-const HERO_SIZE = 30;
+const HERO_SIZE = 50;
 let HERO_POS_X = 25;
 let HERO_POS_Y = (WORLD_HEIGHT - HERO_SIZE) / 2;
 
@@ -76,7 +76,7 @@ function randomEntityX() {
 
 function randomBadEntity() {
   const random = randomIntFromInterval(0, 10);
-  return random === 3;
+  return random > 5;
 }
 
 let ENTITIES = [];
@@ -84,7 +84,7 @@ let ENTITIES = [];
 let pass = false;
 
 function createEntity({ x = WORLD_WIDTH, y = 0, size = 1 }) {
-  const _size = size * 30;
+  const _size = Math.min.apply(null, [40, size * 50]);
 
   ENTITIES.push({
     x: x - ENTITY_SIZE,
@@ -142,11 +142,12 @@ function drawAndMoveEntities() {
       const isCollect = checkCollisionWithHero(entity);
 
       if (isCollect) {
-        if (entity.isBad) {
-          decreaseScore();
-        } else {
-          increaseScore();
-        }
+        increaseScore();
+        // if (entity.isBad) {
+        //   decreaseScore();
+        // } else {
+        //   increaseScore();
+        // }
 
         return false;
       }

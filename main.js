@@ -53,17 +53,21 @@ const startY = ENTITY_SIZE + GAP_VERTICAL;
 const endY = WORLD_HEIGHT - ENTITY_SIZE - GAP_VERTICAL;
 let currentY = startY;
 
-function randomEntityY() {
-  if (currentY < startY || currentY > endY || Math.random() >= 0.5) {
+function getEntityY(value = 1) {
+  if (Math.random() >= 0.5) {
     d = -d;
   }
-  currentY += d;
+  if (currentY < startY) {
+    currentY = startY;
+    d = Math.abs(d);
+  }
+  if (currentY > endY) {
+    currentY = endY;
+    d = -Math.abs(d);
+  }
+  currentY += d * value;
 
   return currentY;
-  // return randomIntFromInterval(
-  //   0 + GAP_VERTICAL,
-  //   WORLD_HEIGHT - ENTITY_SIZE - GAP_VERTICAL
-  // );
 }
 
 function randomEntityX() {
@@ -105,7 +109,7 @@ function frame() {
 }
 
 function drawAndMoveEntities() {
-  console.log(ENTITIES);
+  // console.log(ENTITIES);
   ENTITIES = [...ENTITIES]
     .reduce((acc, entity) => {
       const lastIndex = acc.length - 1;
@@ -113,8 +117,8 @@ function drawAndMoveEntities() {
       if (lastIndex >= 0) {
         const prevEntity = acc[lastIndex];
 
-        const rightX = Math.abs(entity.x - prevEntity.x) > ENTITY_SIZE;
-        const rightY = Math.abs(entity.y - prevEntity.y) > ENTITY_SIZE;
+        const rightX = Math.abs(entity.x - prevEntity.x) > ENTITY_SIZE / 2;
+        const rightY = Math.abs(entity.y - prevEntity.y) > ENTITY_SIZE / 2;
 
         if (rightX && rightY) {
           acc.push(entity);
@@ -126,7 +130,7 @@ function drawAndMoveEntities() {
       return acc;
     }, [])
     .map((entity) => {
-      console.log(ENTITIES);
+      // console.log(ENTITIES);
       const path = WORLD_WIDTH - ENTITY_SIZE - entity.x;
       const size =
         entity.x > WORLD_WIDTH - ENTITY_SIZE * 2 ? (entity.size * ENTITY_SIZE) / path : entity.size;
@@ -239,7 +243,7 @@ function main() {
   window.addEventListener('CREATE', (data) => {
     const value = data.detail.value;
 
-    createEntity({ y: (WORLD_HEIGHT * value) / 2 });
+    createEntity({ y: getEntityY(value), size: value });
   });
 }
 

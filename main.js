@@ -11,7 +11,7 @@ const BGImage = new Image();
 BGImage.src = '/static/bg5.png';
 
 const HEROImage = new Image();
-HEROImage.src = '/static/hero3.png';
+HEROImage.src = '/static/unicorn.png';
 
 const ENTITYImage = new Image();
 ENTITYImage.src = '/static/note1.png';
